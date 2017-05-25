@@ -1,0 +1,6 @@
+*.csv
+*.db
+*.txt
+.ipynb_checkpoints/
+tpex/
+twse/
