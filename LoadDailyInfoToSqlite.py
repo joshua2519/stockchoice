@@ -20,11 +20,17 @@ def InsertStockToSQLite(rows):
     conn.commit()
     conn.close()
 
-d=sys.argv[1]
-#today = datetime.date.today()
-today=datetime.date(year=int(d[0:4]), month=int(d[4:6]), day=int(d[6:8]))
 dates = []
-dates.append(today)
+if(len(sys.argv)>1):
+    d=sys.argv[1]
+    targetDate=datetime.date(year=int(d[0:4]), month=int(d[4:6]), day=int(d[6:8]))
+    print(targetDate)
+    dates.append(targetDate)
+else:
+    today = datetime.date.today()
+    print(today)
+    dates.append(today)
+
 
 #twse
 
@@ -95,6 +101,7 @@ for d in dates:
         Outputs.append((TradeDate,ID,Name,Amount,Open,High,Low,Close,CDP,AH,NH,NL,AL))
     #print(Outputs)
     InsertStockToSQLite(Outputs)
+    print("TWSE %s complete!"%(d,))
 
 #tpex
 for d in dates:
@@ -152,6 +159,7 @@ for d in dates:
         Outputs.append((TradeDate,ID,Name,Amount,Open,High,Low,Close,CDP,AH,NH,NL,AL))
     #print(Outputs)
     InsertStockToSQLite(Outputs)
+    print("TPEX %s complete!"%(d,))
 
 
 # In[ ]:
